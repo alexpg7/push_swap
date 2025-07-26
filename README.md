@@ -191,35 +191,168 @@ These instructions (**ra** **pb** **ra** **ra** **ra** **pb**) result in the fol
 
 ```math
 \begin{align}
-&\text{\textbf{Stack a}} & &\text{\textbf{Stack b}} \\
+&\text{\textbf{Stack a}} & & \text{\textbf{Stack b}} \\
 4&🟧🟧🟧🟧 & 3&🟧🟧🟧\\
-10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 & 1 & 🟥\\
+10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 & 1&🟥\\
 2&🟥🟥 & \\
 6&🟨🟨🟨🟨🟨🟨 & \\
 7&🟩🟩🟩🟩🟩🟩🟩 & \\
 11&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & \\
 8&🟩🟩🟩🟩🟩🟩🟩🟩 &\\
+5&🟨🟨🟨🟨🟨 & \\
 12&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & \\
 9&🟦🟦🟦🟦🟦🟦🟦🟦🟦 & \\
-5&🟨🟨🟨🟨🟨& \\
 \end{align}
 ```
+
 * Repeat the same. This time we will have to swap b **rb**, since the order of the stacks has been placed wrongly.
 
 These steps lead to the instructions (**pb** **ra** **pb** **rb**) lead to:
+```math
+\begin{align}
+&\text{\textbf{Stack a}} & & \text{\textbf{Stack b}} \\
+6&🟨🟨🟨🟨🟨🟨 & 4&🟧🟧🟧🟧 \\
+7&🟩🟩🟩🟩🟩🟩🟩 & 3&🟧🟧🟧\\
+11&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & 1&🟥\\
+8&🟩🟩🟩🟩🟩🟩🟩🟩 & 2&🟥🟥\\
+5&🟨🟨🟨🟨🟨 & \\
+12&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & \\
+9&🟦🟦🟦🟦🟦🟦🟦🟦🟦 & \\
+10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 & \\
+\end{align}
+```
+
+Repeat all these steps until the chunks are sorted. The instructions are (**pb** **rb** **pb** **ra** **pb** **pb** **rb** **pb** **pb** **rb** **pb** **rb** **pb**)
+
+The current stacks should look like this:
 
 ```math
 \begin{align}
-&\text{\textbf{Stack a}} & &\text{\textbf{Stack b}} \\
-4&🟧🟧🟧🟧 & 3&🟧🟧🟧\\
-10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 & 1 & 🟥\\
-2&🟥🟥 & \\
-6&🟨🟨🟨🟨🟨🟨 & \\
-7&🟩🟩🟩🟩🟩🟩🟩 & \\
-11&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & \\
-8&🟩🟩🟩🟩🟩🟩🟩🟩 &\\
-12&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & \\
-9&🟦🟦🟦🟦🟦🟦🟦🟦🟦 & \\
-5&🟨🟨🟨🟨🟨& \\
+&\text{\textbf{Stack a}} & & \text{\textbf{Stack b}} \\
+& & 11&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 \\
+& & 12&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 \\
+& & 8&🟩🟩🟩🟩🟩🟩🟩🟩 \\
+& & 7&🟩🟩🟩🟩🟩🟩🟩 \\
+& & 4&🟧🟧🟧🟧 \\
+& & 3&🟧🟧🟧 \\
+& & 1&🟥 \\
+& & 2&🟥🟥 \\
+& & 6&🟨🟨🟨🟨🟨🟨 \\
+& & 5&🟨🟨🟨🟨🟨 \\
+& & 9&🟦🟦🟦🟦🟦🟦🟦🟦🟦  \\
+& & 10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 \\
 \end{align}
 ```
+
+### 4- Sort by rank
+
+Finally, we have to return the numbers from **Stack b** to **Stack a**, using exactly the same method as before. For small numbers, searching for the $2$ largest ones is not that effective. When havving, for example $500$ numbers and $12$ chunks, it turns out to be really optimal.
+
+* Look for the $2$ largest numbers (in this case, $11(🟪)$ and $12(🟪)$).
+* Rotate until the closest one is at the top (nothing to do in this case) and push it to **a** (**pa**).
+* Look for the other one, rotate to have it at the top (nothing to do in this case) and push it to **a** (**pa**)
+* If the numbers were pushed in the incorrect order, swap **a** (**sa**).
+
+These instructions are (**pa** **pa** **sa**) and lead to:
+```math
+\begin{align}
+&\text{\textbf{Stack a}} & & \text{\textbf{Stack b}} \\
+11&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪  & 8&🟩🟩🟩🟩🟩🟩🟩🟩 \\
+12&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 & 7&🟩🟩🟩🟩🟩🟩🟩 \\
+& & 4&🟧🟧🟧🟧 \\
+& & 3&🟧🟧🟧 \\
+& & 1&🟥 \\
+& & 2&🟥🟥 \\
+& & 6&🟨🟨🟨🟨🟨🟨 \\
+& & 5&🟨🟨🟨🟨🟨 \\
+& & 9&🟦🟦🟦🟦🟦🟦🟦🟦🟦  \\
+& & 10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 \\
+\end{align}
+```
+
+* Repeat until the **Stack a** is sorted. The instructions are (**rrb** **pa** **rrb** **pa** **pa** **pa** **rrb** **pa** **rrb** **pa** **sa** **pa** **pa** **pa** **pa** **sa**) and lead to:
+
+```math
+\begin{align}
+&\text{\textbf{Stack a}} & & \text{\textbf{Stack b}} \\
+1&🟥 \\
+2&🟥🟥 \\
+3&🟧🟧🟧 \\
+4&🟧🟧🟧🟧 \\
+5&🟨🟨🟨🟨🟨 \\
+6&🟨🟨🟨🟨🟨🟨 \\
+7&🟩🟩🟩🟩🟩🟩🟩 \\
+8&🟩🟩🟩🟩🟩🟩🟩🟩 \\
+9&🟦🟦🟦🟦🟦🟦🟦🟦🟦  \\
+10&🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦 \\
+11&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 \\
+12&🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪 \\
+\end{align}
+```
+
+### 5- (Extra step) Clean the string
+
+To reduce even more the instructions, look for combinations of (**ra** **rb** $\equiv$ **rr**), (**rra** **rrb** $\equiv$ **rrr**), (**sa** **sb** $\equiv$ **ss**) to compact the string.
+
+This may not be helpful, but when sorting $500$ elements, it can reduce up to $300$ instructions; which may lead you achieve the highest score.
+
+### ✔️Check it
+
+Now, we can check if the outputed string is a solution of our problem. Execute the following command:
+
+```bash
+./checker 89 0 54 120 99 25 42 100 1 65 73 102
+```
+
+And paste the solution in the standard input:
+
+```bash
+ra
+pb
+ra
+ra
+ra
+pb
+pb
+ra
+pb
+rb
+pb
+rb
+pb
+ra
+pb
+pb
+rb
+pb
+pb
+rb
+pb
+rb
+pb
+pa
+pa
+sa
+rrb
+pa
+rrb
+pa
+pa
+pa
+rrb
+pa
+rrb
+pa
+sa
+pa
+pa
+pa
+pa
+sa
+```
+
+The output is...
+```output
+OK
+```
+🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
