@@ -356,3 +356,9 @@ The output is...
 OK
 ```
 🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
+
+## 📊[`push_swap_visualizer`](https://github.com/alexpg7/push_swap_visualizer)
+
+With MiniLibX, I also have made a program to visualize the execution of your `push_swap` program, called [`push_swap_visualizer`](https://github.com/alexpg7/push_swap_visualizer). Using it, we can visualize the algorithm I implemented:
+
+![til](https://github.com/alexpg7/Images/blob/main/ps_visualizer/Visualizer.gif)
