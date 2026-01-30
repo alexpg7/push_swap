@@ -246,9 +246,9 @@ The current stacks should look like this:
 
 ### 4- Sort by rank
 
-Finally, we have to return the numbers from **Stack b** to **Stack a**, using exactly the same method as before. For small numbers, searching for the $2$ largest ones is not that effective. When havving, for example $500$ numbers and $12$ chunks, it turns out to be really optimal.
+Finally, we have to return the numbers from **Stack b** to **Stack a**, using exactly the same method as before. For small numbers, searching for the $2$ largest ones is not that effective. When having, for example $500$ numbers and $12$ chunks, it turns out to be really optimal.
 
-* Look for the $2$ largest numbers (in this case, $11(🟪)$ and $12(🟪)$).
+* Look for the $2$ largest numbers (in this case, $11$(🟪) and $12$(🟪)).
 * Rotate until the closest one is at the top (nothing to do in this case) and push it to **a** (**pa**).
 * Look for the other one, rotate to have it at the top (nothing to do in this case) and push it to **a** (**pa**)
 * If the numbers were pushed in the incorrect order, swap **a** (**sa**).
